@@ -1,0 +1,12 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.muaviamohammed/mizan",
+  "title": "MIZAN · Proof of performance",
+  "description": "Verify or mint zero-knowledge track-record credentials (VTR-1) without revealing the strategy.",
+  "repository": { "url": "https://github.com/muaviamohammed/mizan-mcp", "source": "github" },
+  "websiteUrl": "https://mizan.market/skill/",
+  "version": "1.0.0",
+  "remotes": [
+    { "type": "streamable-http", "url": "https://studio.mizan.market/mcp" }
+  ]
+}
