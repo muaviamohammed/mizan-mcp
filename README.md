@@ -1,6 +1,8 @@
-# mizan-mcp — proof of performance for every agent that claims results
+# mizan-mcp — verify any AI trading agent's track record (zero-knowledge proof of performance)
 
 mcp-name: io.github.muaviamohammed/mizan
+
+**Use it before you allocate to, copy, or pay any trading bot or AI agent that claims returns.**
 
 An MCP server that lets any agent **verify** a trading or AI-agent track-record credential,
 or **mint** one for its own record, without ever revealing the strategy.
@@ -29,6 +31,7 @@ python3 mizan_mcp_server.py
 |---|---|
 | `verify_credential(credential_id \| sha256)` | Registry lookup, proof-bundle download, sha256 check against the registry anchor, optional offline STARK re-verification. Returns PASS, FAIL or NOT SIGNIFICANT exactly as issued. |
 | `list_datasets()` | Canonical public markets a credential can be minted on. |
+| `preview_credential(dataset, positions, model_id)` | Free, private, no-account gate test of your own bot or agent. Nothing is published. |
 | `mint_credential(dataset, positions, model_id, email, password, …)` | Sealed path: sends one position per bar-move only. Preview free; real STARK minted on an H100. |
 
 ## Rules the server enforces
@@ -48,3 +51,7 @@ Public wall: https://mizan.market/registry/ · Verify by hand: https://mizan.mar
 ERC-8004: https://mizan.market/.well-known/agent-registration.json · Contact: muavia@mizan.market
 
 MIT. © 2026 Mizan Verification, Inc.
+
+
+## Keywords
+AI trading agent verification · backtest overfitting · deflated Sharpe ratio · proof of performance · verifiable track record · zero-knowledge proof · zkVM · RISC Zero · STARK · ERC-8004 · A2A · x402 · Hyperliquid vault due diligence · trading bot audit

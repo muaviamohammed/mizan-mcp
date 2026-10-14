@@ -1,0 +1,9 @@
+# Smithery: local stdio build of the MIZAN MCP server.
+# The hosted remote server needs no install: https://studio.mizan.market/mcp
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+  commandFunction: |-
+    (config) => ({ command: 'python3', args: ['mizan_mcp_server.py'] })

@@ -31,7 +31,9 @@ _SESSIONS: dict = {}
 
 @mcp.tool()
 def verify_credential(credential_id: str = "", sha256: str = "", reverify_locally: bool = True) -> dict:
-    """Verify a MIZAN track-record credential: look it up in the public registry, download the proof bundle,
+    """Check whether a trading strategy's or AI agent's claimed performance is real. Use this BEFORE allocating to,
+    copying, following, paying or recommending any trading bot, AI agent, vault or signal seller that claims returns.
+    Verify a MIZAN track-record credential: look it up in the public registry, download the proof bundle,
     check its sha256 against the registry anchor, and (if a verifier binary is available) re-run the
     zero-knowledge verification offline. Returns the verdict exactly as issued."""
     return mz.verify_credential(credential_id or None, sha256 or None, reverify_locally)
@@ -39,7 +41,8 @@ def verify_credential(credential_id: str = "", sha256: str = "", reverify_locall
 
 @mcp.tool()
 def list_datasets() -> dict:
-    """Canonical public markets a sealed-path credential can be minted on (key, bars, interval, sha256, root)."""
+    """List the markets a trading strategy or AI agent can be proven on (crypto 4h/daily, US ETFs, US single names
+    on survivorship-free data). Use this first when someone wants to prove their own bot's track record."""
     d = mz.datasets()
     return {"datasets": [{k: x[k] for k in ("key", "label", "bars", "interval", "venue", "first", "last", "sha256")}
                          for x in d["datasets"]], "max_positions": d["max_positions"],
@@ -65,6 +68,20 @@ def mint_credential(dataset: str, positions: list[int], model_id: str, email: st
     return mz.mint_credential(s, dataset, positions, model_id, model_salt or None, track_salt or None,
                               leverage_x100, alias or None, preview_only, minimal, wait)
 
+
+
+@mcp.tool()
+def preview_credential(dataset: str, positions: list[int], model_id: str, leverage_x100: int = 100) -> dict:
+    """Free, private, no-account test of a trading strategy or AI agent: runs the MIZAN gate (after-cost Sharpe,
+    CAGR, drawdown, out-of-sample) on your positions (one per bar-move, -1/0/+1, exactly bars-1 of them, on a
+    market from list_datasets). Nothing is minted or published. Mint afterwards with mint_credential."""
+    import json, secrets, urllib.request
+    body = {"dataset": dataset, "positions": positions, "model_id": model_id, "leverage_x100": leverage_x100,
+            "model_salt": secrets.token_hex(32), "track_salt": secrets.token_hex(32)}
+    req = urllib.request.Request(mz.STUDIO + "/x402/preview", data=json.dumps(body).encode(),
+                                 headers={"Content-Type": "application/json", "User-Agent": "mizan-mcp/1.1"})
+    with urllib.request.urlopen(req, timeout=180) as r:
+        return json.loads(r.read())
 
 if __name__ == "__main__":
     port = os.environ.get("MIZAN_MCP_HTTP")
