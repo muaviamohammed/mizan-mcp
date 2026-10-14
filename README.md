@@ -37,6 +37,11 @@ python3 mizan_mcp_server.py
 - A FAIL is a result, not a secret. A credential is a backtest seal, not a forecast.
 - HFT and fill-dependent strategies are refused, permanently.
 
+## Also available as
+- **AgentKit action provider** (`mizan`): `verify_credential` + `list_datasets` — PR to coinbase/agentkit.
+- **A2A agent**: `https://studio.mizan.market/a2a` (JSON-RPC `message/send` → "verify <id>"); card at `https://mizan.market/.well-known/agent-card.json`.
+- **ERC-8004 validator** on Base: registration file at `https://mizan.market/.well-known/agent-registration.json`.
+
 ## Links
 Skill for agents (SKILL.md, tool schemas, A2A card): https://mizan.market/skill/ ·
 Public wall: https://mizan.market/registry/ · Verify by hand: https://mizan.market/verify/ ·
