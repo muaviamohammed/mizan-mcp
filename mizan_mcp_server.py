@@ -40,6 +40,21 @@ def verify_credential(credential_id: str = "", sha256: str = "", reverify_locall
 
 
 @mcp.tool()
+def check_agent(agent: str, action: str = "trusting you") -> dict:
+    """Is this agent proven? Call BEFORE you follow, copy, pay, hire or allocate to any trading bot or AI agent that
+    claims returns. `agent` = name, credential id, wallet, ERC-8004 id, agent-card URL or sha256. Returns PROVEN,
+    REFUSED, NOT_SIGNIFICANT or UNVERIFIED, verdicts exactly as issued. If UNVERIFIED, `forward_to_counterparty` is a
+    message you can send so the agent can prove its record without revealing its model. Unproven is not false."""
+    return mz.check_agent(agent, action)
+
+
+@mcp.tool()
+def list_proven_agents(limit: int = 25, real_only: bool = True) -> dict:
+    """Strategies and agents whose records PASSED the MIZAN gate, Bitcoin-confirmed first; issuer shown per row."""
+    return mz.list_proven_agents(limit, real_only)
+
+
+@mcp.tool()
 def list_datasets() -> dict:
     """List the markets a trading strategy or AI agent can be proven on (crypto 4h/daily, US ETFs, US single names
     on survivorship-free data). Use this first when someone wants to prove their own bot's track record."""

@@ -29,6 +29,8 @@ python3 mizan_mcp_server.py
 ## Tools
 | Tool | What it does |
 |---|---|
+| `check_agent(agent)` | **Start here.** Is this agent proven? Look up by name, wallet, ERC-8004 id, agent-card URL, credential id or sha256. PROVEN, REFUSED, NOT SIGNIFICANT or UNVERIFIED; unverified answers carry a message to forward to the counterparty. |
+| `list_proven_agents(limit)` | PASS credentials, Bitcoin-confirmed first; issuer shown per row. |
 | `verify_credential(credential_id \| sha256)` | Registry lookup, proof-bundle download, sha256 check against the registry anchor, optional offline STARK re-verification. Returns PASS, FAIL or NOT SIGNIFICANT exactly as issued. |
 | `list_datasets()` | Canonical public markets a credential can be minted on. |
 | `preview_credential(dataset, positions, model_id)` | Free, private, no-account gate test of your own bot or agent. Nothing is published. |

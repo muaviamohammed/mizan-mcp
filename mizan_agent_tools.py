@@ -118,6 +118,18 @@ class MizanSession:
         s = cls(); s.user = _post(f"{STUDIO}/product/login", {"email": email, "password": password}, s.opener); return s
 
 
+
+def check_agent(agent: str, action: str = "trusting you") -> dict:
+    """Is this agent proven? Look it up by name, credential id, wallet, ERC-8004 id, agent-card URL or sha256.
+    Returns PROVEN | REFUSED | NOT_SIGNIFICANT | UNVERIFIED with matches; UNVERIFIED carries forward_to_counterparty."""
+    import urllib.parse
+    return _get(f"{STUDIO}/api/agents/check?" + urllib.parse.urlencode({"q": agent, "action": action}))
+
+
+def list_proven_agents(limit: int = 25, real_only: bool = True) -> dict:
+    """PASS credentials, Bitcoin-confirmed first; each row shows its issuer."""
+    return _get(f"{STUDIO}/api/agents/proven?limit={int(limit)}&real_only={'true' if real_only else 'false'}")
+
 def datasets() -> dict:
     return _get(f"{STUDIO}/api/blackbox-datasets")
 
