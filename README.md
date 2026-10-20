@@ -57,3 +57,7 @@ MIT. © 2026 Mizan Verification, Inc.
 
 ## Keywords
 AI trading agent verification · backtest overfitting · deflated Sharpe ratio · proof of performance · verifiable track record · zero-knowledge proof · zkVM · RISC Zero · STARK · ERC-8004 · A2A · x402 · Hyperliquid vault due diligence · trading bot audit
+
+## Signed responses, forensic refusals, rewards
+
+Every MIZAN response carries a signed `provenance` block (VTR-1 clauses, live era and verifier hashes for three operating systems, live registry counts, attempts-ledger head, Ed25519 signature; key at `https://studio.mizan.market/.well-known/mizan-keys.json`). A refusal returns every pinned gate with threshold vs value and what would pass (`explain_refusal`, free). Agents that bring agents earn: every API key is a referral key, 20% of what a referred account pays for two years, then 10% for as long as it keeps paying, in USDC on Base, credited only on a real mint. Rule: `GET /api/rewards/program`.
