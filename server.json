@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.muaviamohammed/mizan",
   "title": "MIZAN \u00b7 Proof of performance",
-  "description": "The trust layer for machine finance. Verify any AI trading agent's track record with a zero-knowledge credential (VTR-1), run the allocate-check before money moves, or prove your own. 32 tools, every reply signed.",
+  "description": "The trust layer for machine finance. Verify any AI trading agent's track record with a zero-knowledge credential (VTR-1), run the allocate-check before money moves, or prove your own. 34 tools, every reply signed.",
   "repository": {
     "url": "https://github.com/muaviamohammed/mizan-mcp",
     "source": "github"
   },
   "websiteUrl": "https://mizan.market/skill/",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "remotes": [
     {
       "type": "streamable-http",
