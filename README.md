@@ -11,7 +11,7 @@ MIZAN credentials are zero-knowledge (STARK) proofs under the open [VTR-1 standa
 the record is recomputed inside the proof with the trial count, cost schedule and out-of-sample split
 bound in-circuit. Anyone verifies a credential offline in ~81 ms. FAIL verdicts are published alongside passes.
 
-> Prove the edge. Never reveal the strategy.
+> Prove the claim. Never reveal the method.
 
 ## Remote (no install)
 ```
