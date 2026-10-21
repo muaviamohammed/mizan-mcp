@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.muaviamohammed/mizan",
-  "title": "MIZAN · Proof of performance",
-  "description": "Zero-knowledge proof of what an AI agent earned. One signed yes or no before you pay it.",
+  "title": "MIZAN \u00b7 Proof of performance",
+  "description": "Check any agent before you pay it. Prove your own record without revealing your model.",
   "repository": {
     "url": "https://github.com/muaviamohammed/mizan-mcp",
     "source": "github"
   },
   "websiteUrl": "https://mizan.market/skill/",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "remotes": [
     {
       "type": "streamable-http",
