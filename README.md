@@ -1,23 +1,40 @@
-# mizan-mcp — verify any AI trading agent's track record (zero-knowledge proof of performance)
+# MIZAN MCP: check before you pay. Prove to get paid.
 
 mcp-name: io.github.muaviamohammed/mizan
 
-**Use it before you allocate to, copy, or pay any trading bot or AI agent that claims returns.**
+**No capital moves to a machine without proof.** Before your agent pays, hires, copies or allocates to another agent, one call returns a signed **ALLOW** or **REFUSE** on what that agent really earned, proven in zero knowledge. And any agent can prove its own record without revealing its model, code, prompts or strategy.
 
-An MCP server that lets any agent **verify** a trading or AI-agent track-record credential,
-or **mint** one for its own record, without ever revealing the strategy.
-
-MIZAN credentials are zero-knowledge (STARK) proofs under the open [VTR-1 standard](https://mizan.market/standard-spec):
-the record is recomputed inside the proof with the trial count, cost schedule and out-of-sample split
-bound in-circuit. Anyone verifies a credential offline in ~81 ms. FAIL verdicts are published alongside passes.
-
-> Prove the claim. Never reveal the method.
-
-## Remote (no install)
 ```
-https://studio.mizan.market/mcp        # streamable HTTP, stateless
+claude mcp add --transport http mizan https://studio.mizan.market/mcp
 ```
-Claude Code: `claude mcp add --transport http mizan https://studio.mizan.market/mcp`
+
+Remote, stateless, no install, no key needed to check. Listed on the [official MCP registry](https://registry.modelcontextprotocol.io).
+
+## Two calls
+
+| Tool | When to call it |
+|---|---|
+| **`check(agent)`** | **Before money moves.** Pay, hire, copy, follow or allocate: one signed ALLOW or REFUSE, free, in milliseconds. Proceed only on ALLOW. On REFUSE the reply carries a **proof request**, a link and a ready message to forward, so the counterparty can prove itself; when it passes, your next check returns ALLOW. `agent` = credential id, agent id, wallet, ERC-8004 id or agent-card URL. |
+| **`prove()`** | **To get paid.** A free, private verdict on your own record, then a zero-knowledge credential every checker sees. Only one position per bar leaves your machine. Call with no arguments for the markets and the format. |
+| `more()` | Everything else, grouped by job: verify a credential someone shows you, the open standard and its gates, the Bitcoin-anchored log, receipts, your identity and standing, checks beyond trading records (jobs, mandates, lending). |
+
+The default address lists these three. Every tool stays callable there, and the full list is at `https://studio.mizan.market/mcp/full`.
+
+## Why an agent can rely on the answer
+
+- **Proven, not reported.** The record is re-run inside a STARK proof under the open, frozen [VTR-1 standard](https://mizan.market/standard/): after costs, on committed data, out-of-sample, deflated for every try.
+- **It says no.** Refusals are published beside passes, MIZAN's own AI models among them. That is what makes a pass worth something.
+- **Don't take our word for it.** Every reply is Ed25519-signed (key at `https://studio.mizan.market/.well-known/mizan-keys.json`). Every verdict is a leaf of a Bitcoin-anchored transparency log. The verifier re-runs any credential offline on macOS, Linux or Windows: exit 0 or it is refused.
+- **Your method stays yours.** Never send a strategy, model, weights, code or prompt anywhere. Positions only.
+
+## In the payment itself (x402)
+
+```js
+import { guardFetch } from "https://mizan.market/skill/mizan-x402-guard.mjs";
+const pay = guardFetch(fetchWithPayment, { mode: "advise" });   // later: { mode: "enforce" }
+```
+
+The guard reads the seller's 402 terms, checks the wallet being paid, then pays. Advise mode attaches the signed answer; enforce mode pays only on ALLOW. Python: `from mizan.x402guard import guard`. Platforms: the [require kit](https://mizan.market/require/) adds the Proven / Refused / Unproven label next to every agent in two lines of HTML.
 
 ## Local (stdio)
 ```bash
@@ -26,38 +43,18 @@ python3 mizan_mcp_server.py
 # Claude Code: claude mcp add mizan -- python3 /path/to/mizan_mcp_server.py
 ```
 
-## Tools
-| Tool | What it does |
-|---|---|
-| `check_agent(agent)` | **Start here.** Is this agent proven? Look up by name, wallet, ERC-8004 id, agent-card URL, credential id or sha256. PROVEN, REFUSED, NOT SIGNIFICANT or UNVERIFIED; unverified answers carry a message to forward to the counterparty. |
-| `list_proven_agents(limit)` | PASS credentials, Bitcoin-confirmed first; issuer shown per row. |
-| `verify_credential(credential_id \| sha256)` | Registry lookup, proof-bundle download, sha256 check against the registry anchor, optional offline STARK re-verification. Returns PASS, FAIL or NOT SIGNIFICANT exactly as issued. |
-| `list_datasets()` | Canonical public markets a credential can be minted on. |
-| `preview_credential(dataset, positions, model_id)` | Free, private, no-account gate test of your own bot or agent. Nothing is published. |
-| `mint_credential(dataset, positions, model_id, email, password, …)` | Sealed path: sends one position per bar-move only. Preview free; real STARK minted on an H100. |
-
-## Rules the server enforces
-- Never send a strategy, model, weights, code or prompt anywhere. Positions only.
-- Never claim a PASS without a bundle whose hash matches the registry.
-- A FAIL is a result, not a secret. A credential is a backtest seal, not a forecast.
-- HFT and fill-dependent strategies are refused, permanently.
-
 ## Also available as
-- **AgentKit action provider** (`mizan`): `verify_credential` + `list_datasets` — PR to coinbase/agentkit.
-- **A2A agent**: `https://studio.mizan.market/a2a` (JSON-RPC `message/send` → "verify <id>"); card at `https://mizan.market/.well-known/agent-card.json`.
-- **ERC-8004 validator** on Base: registration file at `https://mizan.market/.well-known/agent-registration.json`.
+- **A2A agent**: `https://studio.mizan.market/a2a`; card at `https://mizan.market/.well-known/agent-card.json`.
+- **Framework tools**: LangChain, LangGraph, CrewAI ([mizan-agent-tools](https://github.com/muaviamohammed/mizan-agent-tools)), elizaOS ([plugin-mizan](https://github.com/muaviamohammed/plugin-mizan)), TypeScript ([mizan-agent-tools-js](https://github.com/muaviamohammed/mizan-agent-tools-js)).
+- **CLI**: `mizan verify <record-or-wallet>` previews any Hyperliquid, Freqtrade, MT5, QuantConnect or TradingView record in one step ([wheel](https://mizan.market/skill/mizan_sdk-0.5.2-py3-none-any.whl)).
 
 ## Links
-Skill for agents (SKILL.md, tool schemas, A2A card): https://mizan.market/skill/ ·
-Public wall: https://mizan.market/registry/ · Verify by hand: https://mizan.market/verify/ ·
-ERC-8004: https://mizan.market/.well-known/agent-registration.json · Contact: muavia@mizan.market
+[mizan.market](https://mizan.market) · [Check any agent](https://mizan.market/scan/) · [Registry](https://mizan.market/registry/) · [Skill for agents](https://mizan.market/skill/) · muavia@mizan.market
+
+Every API key is a referral key: agents that bring agents earn, credited only on a real mint (`GET /api/rewards/program`).
+
+A credential is a seal on a past record, not a forecast. MIZAN never holds or routes funds.
 
 MIT. © 2026 Mizan Verification, Inc.
 
-
-## Keywords
-AI trading agent verification · backtest overfitting · deflated Sharpe ratio · proof of performance · verifiable track record · zero-knowledge proof · zkVM · RISC Zero · STARK · ERC-8004 · A2A · x402 · Hyperliquid vault due diligence · trading bot audit
-
-## Signed responses, forensic refusals, rewards
-
-Every MIZAN response carries a signed `provenance` block (VTR-1 clauses, live era and verifier hashes for three operating systems, live registry counts, attempts-ledger head, Ed25519 signature; key at `https://studio.mizan.market/.well-known/mizan-keys.json`). A refusal returns every pinned gate with threshold vs value and what would pass (`explain_refusal`, free). Agents that bring agents earn: every API key is a referral key, 20% of what a referred account pays for two years, then 10% for as long as it keeps paying, in USDC on Base, credited only on a real mint. Rule: `GET /api/rewards/program`.
+<sub>Keywords: AI agent verification · check before you pay · proof of performance · verifiable track record · zero-knowledge proof · STARK · RISC Zero · MCP · A2A · x402 · ERC-8004 · backtest overfitting · deflated Sharpe ratio · trading bot due diligence</sub>
