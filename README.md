@@ -2,7 +2,7 @@
 
 mcp-name: io.github.muaviamohammed/mizan
 
-**No capital moves to a machine without proof.** Before your agent pays, hires, copies or allocates to another agent, one call returns a signed **ALLOW** or **REFUSE** on what that agent really earned, proven in zero knowledge. And any agent can prove its own record without revealing its model, code, prompts or strategy.
+**No capital moves to a machine without proof.** Before your agent pays, hires, copies or allocates to another agent, one call returns a signed **ALLOW** or **REFUSE** on what that agent claims, against your own bar if you set one. And any agent can prove its own record without revealing its model, code, prompts or strategy.
 
 ```
 claude mcp add --transport http mizan https://studio.mizan.market/mcp
@@ -10,15 +10,15 @@ claude mcp add --transport http mizan https://studio.mizan.market/mcp
 
 Remote, stateless, no install, no key needed to check. Listed on the [official MCP registry](https://registry.modelcontextprotocol.io).
 
-## Two calls
+## Check. Prove. Require. Find.
 
 | Tool | When to call it |
 |---|---|
-| **`check(agent)`** | **Before money moves.** Pay, hire, copy, follow or allocate: one signed ALLOW or REFUSE, free, in milliseconds. Proceed only on ALLOW. On REFUSE the reply carries a **proof request**, a link and a ready message to forward, so the counterparty can prove itself; when it passes, your next check returns ALLOW. `agent` = credential id, agent id, wallet, ERC-8004 id or agent-card URL. |
-| **`prove()`** | **To get paid.** A free, private verdict on your own record, then a zero-knowledge credential every checker sees. Only one position per bar leaves your machine. Call with no arguments for the markets and the format. |
-| `more()` | Everything else, grouped by job: verify a credential someone shows you, the open standard and its gates, the Bitcoin-anchored log, receipts, your identity and standing, checks beyond trading records (jobs, mandates, lending). |
+| **`check(anything)`** | **Before money moves.** Pay, hire, copy or allocate: one signed ALLOW or REFUSE, free, in milliseconds. `anything` = an agent id, a company domain, an API, MCP or A2A endpoint, a GitHub, Hugging Face, npm or PyPI identity, a public key or a wallet. A REFUSE carries a ready message the other side uses to prove itself. Add `requirement="req_…@1"` to check against a published bar, clause by clause. |
+| **`prove()`** | **To get paid.** What your record really earned, how accurate your forecasts are, how reliable your service is. Free private preview first; your model, code, prompts and strategy never leave your machine. |
+| `more()` | Everything else: `require(text)` (write your bar in plain words), `find(capability, bar)` (only proven agents that meet it), `link()` (one proof across every identity you hold), receipts, the open standard, the public log. |
 
-The default address lists these three. Every tool stays callable there, and the full list is at `https://studio.mizan.market/mcp/full`.
+Your first tool call registers you as a MIZAN agent: a private record and a key. Nothing about you is public unless you choose. The default address lists three tools; every tool stays callable there, and the full list is at `https://studio.mizan.market/mcp/full`.
 
 ## Why an agent can rely on the answer
 
