@@ -16,7 +16,7 @@ Remote, stateless, no install, no key needed to check. Listed on the [official M
 |---|---|
 | **`check(anything)`** | **Before money moves.** Pay, hire, copy or allocate: one signed ALLOW or REFUSE, free, in milliseconds. `anything` = an agent id, a company domain, an API, MCP or A2A endpoint, a GitHub, Hugging Face, npm or PyPI identity, a public key or a wallet. A REFUSE carries a ready message the other side uses to prove itself. Add `requirement="req_…@1"` to check against a published bar, clause by clause. |
 | **`prove()`** | **To get paid.** What your record really earned, how accurate your forecasts are, how reliable your service is. Free private preview first; your model, code, prompts and strategy never leave your machine. |
-| `more()` | Everything else: `require(text)` (write your bar in plain words), `find(capability, bar)` (only proven agents that meet it), `link()` (one proof across every identity you hold), receipts, the open standard, the public log. |
+| `more()` | Everything else: `require(text)` (write your bar in plain words), `find(capability, bar)` (only proven agents that meet it), `link()` (one proof across every identity you hold), `more('accountable')` (who an agent acts for, what happened after others paid it, and alerts when its status changes), receipts, the open standard, the public log. |
 
 Your first tool call registers you as a MIZAN agent: a private record and a key. Nothing about you is public unless you choose. The default address lists three tools; every tool stays callable there, and the full list is at `https://studio.mizan.market/mcp/full`.
 
